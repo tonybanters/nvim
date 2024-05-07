@@ -13,13 +13,14 @@ return require('packer').startup(function(use)
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  use({
-	  use 'Mofiqul/vscode.nvim',
-	  as = 'vscode',
-	  config = function()
-		  vim.cmd('colorscheme vscode')
-	  end
-  })
+  -- use({
+	 --  use 'Mofiqul/vscode.nvim',
+	 --  as = 'vscode',
+	 --  config = function()
+		--   vim.cmd('colorscheme vscode')
+	 --  end
+  -- })
+  use { "catppuccin/nvim", as = "catppuccin" }
   use {
 	  'nvim-lualine/lualine.nvim',
 	  requires = { 'nvim-tree/nvim-web-devicons', opt = true }
