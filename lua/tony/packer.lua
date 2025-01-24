@@ -36,29 +36,32 @@ return require('packer').startup(function(use)
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
   use('captbaritone/better-indent-support-for-php-with-html')
-  use('neovim/nvim-lspconfig')
   use('ojroques/vim-oscyank')
 
-  -- use {
-  --   'saghen/blink.cmp',
-  --   requires = { 'rafamadriz/friendly-snippets' }, -- Add dependency
-  --   version = '*',
-  --   config = function()
-  --     require('blink.cmp').setup({
-  --       keymap = { preset = 'default' },
-  --       appearance = {
-  --         use_nvim_cmp_as_default = true,
-  --         nerd_font_variant = 'mono'
-  --       },
-  --       signature = { enabled = true },
-  --     })
-  --   end,
-  -- }
-  use('hrsh7th/cmp-nvim-lsp')
-  use('hrsh7th/cmp-buffer')
-  use('hrsh7th/cmp-path')
-  use('hrsh7th/cmp-cmdline')
-  use('hrsh7th/nvim-cmp')
+  -- LSP
+  use {
+      'VonHeikemen/lsp-zero.nvim',
+      branch = 'v1.x',
+      requires = {
+          -- LSP Support
+          {'neovim/nvim-lspconfig'},
+          {'williamboman/mason.nvim'},
+          {'williamboman/mason-lspconfig.nvim'},
+
+          -- Autocompletion
+          {'hrsh7th/nvim-cmp'},
+          {'hrsh7th/cmp-buffer'},
+          {'hrsh7th/cmp-path'},
+          {'saadparwaiz1/cmp_luasnip'},
+          {'hrsh7th/cmp-nvim-lsp'},
+          {'hrsh7th/cmp-nvim-lua'},
+
+          -- Snippets
+          {'L3MON4D3/LuaSnip'},
+          {'rafamadriz/friendly-snippets'},
+      }
+  }
+
 
   
 end)
