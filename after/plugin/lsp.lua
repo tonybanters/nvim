@@ -32,8 +32,8 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 -- pyright is too good, the type checking shows problems in our type defenitions
--- local servers = {'pylsp', "tsserver"}
-local servers = {'pyright', "intelephense", 'rust_analyzer'}
+-- local servers = {'pylsp', "ts_ls"}
+local servers = {'pyright', "intelephense", 'rust_analyzer', 'ts_ls', 'eslint'}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
