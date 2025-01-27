@@ -37,6 +37,7 @@ return require('packer').startup(function(use)
   use('tpope/vim-fugitive')
   use('captbaritone/better-indent-support-for-php-with-html')
   use('ojroques/vim-oscyank')
+  use("nvim-tree/nvim-web-devicons")
 
   -- LSP
   use {

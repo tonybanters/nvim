@@ -43,6 +43,8 @@ vim.keymap.set('v', '<leader>y', '<Plug>OSCYankVisual')
 -- reload without exiting vim
 vim.keymap.set("n", "<leader>rl", "<cmd>source ~/.config/nvim/init.lua<cr>")
 
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
