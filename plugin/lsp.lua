@@ -183,7 +183,7 @@ vim.lsp.config['clangd'] = {
         '--query-driver=/nix/store/*-gcc-*/bin/gcc*,/nix/store/*-clang-*/bin/clang*,/run/current-system/sw/bin/cc*',
     },
     filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
-    root_markers = { 'compile_commands.json', '.clangd', 'configure.ac', 'Makefile', '.git' },
+    root_markers = { 'compile_commands.json', '.clangd', 'configure.ac', 'Makefile', 'makefile', '.git' },
     capabilities = caps,
     init_options = {
         fallbackFlags = { '-std=c23' }, -- Default to C23
@@ -218,7 +218,7 @@ vim.filetype.add({
     },
 })
 
-for name, _ in pairs(vim.lsp.config) do
+for name, _ in pairs(vim.lsp.config['_configs']) do
     if name ~= '*' then  -- Skip the wildcard config
         vim.lsp.enable(name)
     end
