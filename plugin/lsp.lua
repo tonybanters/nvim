@@ -218,8 +218,8 @@ vim.filetype.add({
     },
 })
 
-for name, _ in pairs(vim.lsp.config['_configs']) do
-    if name ~= '*' then  -- Skip the wildcard config
+for name, _ in pairs(vim.lsp.config._configs) do
+    if name ~= '*' then -- Skip the wildcard config
         vim.lsp.enable(name)
     end
 end
