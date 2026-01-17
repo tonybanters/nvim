@@ -6,6 +6,17 @@ return {
             "nvim-treesitter/nvim-treesitter-textobjects",
         },
         config = function()
+            vim.filetype.add({ extension = { goon = "goon" } })
+
+            local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+            parser_config.goon = {
+                install_info = {
+                    url = "/home/tony/repos/tree-sitter-goon",
+                    files = { "src/parser.c" },
+                },
+                filetype = "goon",
+            }
+
             local configs = require("nvim-treesitter.configs")
             ---@diagnostic disable-next-line: missing-fields
             configs.setup({
@@ -29,11 +40,14 @@ return {
                 autotag = { enable = true },
                 -- ensure these language parsers are installed
                 ensure_installed = {
+                    "goon",
                     "json",
                     "python",
                     "ron",
                     "javascript",
                     "haskell",
+                    -- "c3c",
+                    "d",
                     "query",
                     "typescript",
                     "tsx",

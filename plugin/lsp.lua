@@ -52,6 +52,20 @@ vim.api.nvim_create_autocmd('LspAttach', {
         map({ 'n', 'x' }, '<F3>', function() vim.lsp.buf.format({ async = true }) end)
         map('n', '<F4>', vim.lsp.buf.code_action)
 
+        if client:supports_method('textDocument/documentHighlight') then
+            local highlight_augroup = vim.api.nvim_create_augroup('my.lsp.highlight', { clear = false })
+            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+                buffer = buf,
+                group = highlight_augroup,
+                callback = vim.lsp.buf.document_highlight,
+            })
+            vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+                buffer = buf,
+                group = highlight_augroup,
+                callback = vim.lsp.buf.clear_references,
+            })
+        end
+
         local excluded_filetypes = { php = true, c = true, cpp = true }
         if not client:supports_method('textDocument/willSaveWaitUntil')
             and client:supports_method('textDocument/formatting')
@@ -67,7 +81,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end
     end,
 })
-
 local caps = require("cmp_nvim_lsp").default_capabilities()
 vim.lsp.config['luals'] = {
     cmd = { 'lua-language-server' },
@@ -190,6 +203,20 @@ vim.lsp.config['clangd'] = {
     },
 }
 
+vim.lsp.config['c3lsp'] = {
+    cmd = { 'c3-lsp' },
+    filetypes = { 'c3' },
+    root_markers = { 'project.json', '.git' },
+    capabilities = caps,
+}
+
+vim.lsp.config['serve_d'] = {
+    cmd = { 'serve-d' },
+    filetypes = { 'd' },
+    root_markers = { 'dub.sdl', 'dub.json', '.git' },
+    capabilities = caps,
+}
+
 vim.lsp.config['jsonls'] = {
     cmd = { 'vscode-json-languageserver', '--stdio' },
     filetypes = { 'json', 'jsonc' },
@@ -212,14 +239,32 @@ vim.lsp.config['hls'] = {
     },
 }
 
+vim.lsp.config['gopls'] = {
+    cmd = { 'gopls' },
+    filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+    root_markers = { 'go.mod', 'go.work', '.git' },
+    capabilities = caps,
+    settings = {
+        gopls = {
+            analyses = {
+                unusedparams = true,
+            },
+            staticcheck = true,
+        },
+    },
+}
+
 vim.filetype.add({
     extension = {
         h = 'c',
+        c3 = 'c3',
+        d = 'd',
     },
 })
 
-for name, _ in pairs(vim.lsp.config) do
-    if name ~= '*' then  -- Skip the wildcard config
+---@diagnostic disable-next-line: invisible
+for name, _ in pairs(vim.lsp.config._configs) do
+    if name ~= '*' then -- Skip the wildcard config
         vim.lsp.enable(name)
     end
 end

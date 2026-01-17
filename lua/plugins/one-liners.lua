@@ -2,6 +2,9 @@ return {
     { -- This helps with php/html for indentation
         'captbaritone/better-indent-support-for-php-with-html',
     },
+    {
+        'nvim-treesitter/nvim-treesitter-context',
+    },
     { -- This helps with ssh tunneling and copying to clipboard
         'ojroques/vim-oscyank',
     },
