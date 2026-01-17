@@ -1,15 +1,13 @@
 vim.filetype.add({ extension = { goon = "goon" } })
 
-vim.api.nvim_create_autocmd("User", {
-    pattern = "TSUpdate",
-    callback = function()
-        require("nvim-treesitter.parsers").goon = {
-            install_info = {
-                path = "/home/tony/repos/tree-sitter-goon",
-            },
-        }
-    end,
-})
+require("nvim-treesitter.parsers").goon = {
+    install_info = {
+        path = "/home/tony/repos/tree-sitter-goon",
+        files = { "src/parser.c" },
+        queries = "queries",
+    },
+    filetype = "goon",
+}
 
 local ts = require("nvim-treesitter")
 
@@ -24,7 +22,9 @@ local parsers = {
     "dockerfile", "gitignore", "astro",
 }
 
-ts.install(parsers)
+vim.api.nvim_create_user_command("TSInstallAll", function()
+    ts.install(parsers)
+end, {})
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "*",
