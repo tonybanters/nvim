@@ -247,6 +247,7 @@ vim.lsp.config['gopls'] = {
     settings = {
         gopls = {
             analyses = {
+                ST1003 = false,
                 unusedparams = true,
             },
             staticcheck = true,
