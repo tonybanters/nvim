@@ -19,7 +19,7 @@ local parsers = {
     "json", "python", "ron", "javascript", "haskell", "d", "query",
     "typescript", "tsx", "rust", "zig", "php", "yaml", "html", "css",
     "markdown", "markdown_inline", "bash", "lua", "vim", "vimdoc", "c",
-    "dockerfile", "gitignore", "astro", "nim"
+    "dockerfile", "gitignore", "astro", "nim", "go"
 }
 
 vim.api.nvim_create_user_command("TSInstallAll", function()
