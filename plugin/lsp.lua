@@ -245,6 +245,13 @@ vim.lsp.config['gopls'] = {
     root_markers = { 'go.mod', 'go.work', '.git' },
     capabilities = caps,
     settings = {
+        gopls = {
+            analyses = {
+                ST1003 = false,
+                unusedparams = true,
+            },
+            staticcheck = true,
+        },
     },
 }
 
