@@ -247,12 +247,20 @@ vim.lsp.config['gopls'] = {
     settings = {
         gopls = {
             analyses = {
+                unusedparams = false,
                 ST1003 = false,
-                unusedparams = true,
+                ST1000 = false,
             },
             staticcheck = true,
         },
     },
+}
+
+vim.lsp.config['templ'] = {
+    cmd = { 'templ', 'lsp' },
+    filetypes = { 'templ' },
+    root_markers = { 'go.mod', '.git' },
+    capabilities = caps,
 }
 
 vim.filetype.add({
@@ -260,12 +268,13 @@ vim.filetype.add({
         h = 'c',
         c3 = 'c3',
         d = 'd',
+        templ = 'templ',
     },
 })
 
 ---@diagnostic disable-next-line: invisible
 for name, _ in pairs(vim.lsp.config._configs) do
-    if name ~= '*' then -- Skip the wildcard config
+    if name ~= '*' then
         vim.lsp.enable(name)
     end
 end
