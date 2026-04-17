@@ -1,8 +1,14 @@
 local cmp = require("cmp")
+require("cmp_nvim_lsp").setup()
+cmp.register_source("path", require("cmp_path").new())
+cmp.register_source("buffer", require("cmp_buffer"))
 
 cmp.setup({
     preselect = cmp.PreselectMode.Item,
-    completion = { completeopt = "menu,menuone,noinsert" },
+    completion = {
+        completeopt = "menu,menuone,noinsert",
+        autocomplete = { cmp.TriggerEvent.TextChanged },
+    },
     window = { documentation = cmp.config.window.bordered() },
     mapping = cmp.mapping.preset.insert({
         ["<CR>"] = cmp.mapping.confirm({ select = false }),

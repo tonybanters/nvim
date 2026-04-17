@@ -29,8 +29,6 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
--- getting Alex off my back :)
-vim.keymap.set("n", "<leader>dg", "<cmd>DogeGenerate<cr>")
 
 -- lint / format php files for LC
 vim.keymap.set("n", "<leader>cc", "<cmd>!php-cs-fixer fix % --using-cache=no<cr>")
